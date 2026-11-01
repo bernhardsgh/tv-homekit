@@ -16,7 +16,12 @@ jobs:
           gradle-version: 8.5
       - run: unzip -q tv-homekit.zip
       - run: |
-          echo "configurations.configureEach { exclude group: 'javax.json', module: 'javax.json-api' }" >> tv-homekit/app/build.gradle
+          cat >> tv-homekit/app/build.gradle <<'EOF'
+          configurations.configureEach {
+              exclude group: 'javax.json', module: 'javax.json-api'
+              exclude group: 'org.zeromq', module: 'curve25519-java'
+          }
+          EOF
       - run: cd tv-homekit && gradle assembleDebug --no-daemon
       - uses: softprops/action-gh-release@v2
         with:
