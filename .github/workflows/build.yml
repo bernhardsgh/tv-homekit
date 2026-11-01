@@ -26,6 +26,7 @@ jobs:
           F=tv-homekit/app/src/main/java/de/tvhomekit/HomeKitService.java
           sed -i '/^import .*HomekitRoot;/d' $F
           sed -i 's/HomekitRoot/io.github.hapjava.server.impl.HomekitStandaloneAccessoryServer/g' $F
+          sed -i 's/if (root != null) root.stop();//' $F
       - run: cd tv-homekit && gradle assembleDebug --no-daemon
       - uses: softprops/action-gh-release@v2
         with:
