@@ -15,6 +15,8 @@ jobs:
         with:
           gradle-version: 8.5
       - run: unzip -q tv-homekit.zip
+      - run: |
+          echo "configurations.configureEach { exclude group: 'javax.json', module: 'javax.json-api' }" >> tv-homekit/app/build.gradle
       - run: cd tv-homekit && gradle assembleDebug --no-daemon
       - uses: softprops/action-gh-release@v2
         with:
